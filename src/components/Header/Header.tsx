@@ -20,7 +20,7 @@ export default function Header() {
 
       <div className='flex items-center justify-center gap-8'>
         <Href to={'/login'}>Login</Href>
-        <Button variant='primary'>Sign Up</Button>
+        <Button onClick={() => {return}} variant='primary'>Sign Up</Button>
       </div>
     </header>
   )

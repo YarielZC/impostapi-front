@@ -1,5 +1,4 @@
 import Button from "../../components/Button/Button";
-import Header from "../../components/Header/Header";
 import './HomePage.css'
 import { useAuth } from "../../context/AutContext/useAuth";
 
@@ -20,7 +19,6 @@ export default function HomePage() {
   }
   return (
     <>
-      <Header></Header>
       <h1>Home Page</h1>
       {user ? (
         <div style={{display: 'flex', gap: '2rem'}}>
