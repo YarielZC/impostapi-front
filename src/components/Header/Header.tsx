@@ -1,7 +1,7 @@
-import Button from "../../components/Button/Button";
+import Button from "../Button/Button";
 import './Header.css'
 import * as LogoWebp from '../../assets/Logo.webp'
-import Href from "../../components/Href/Href";
+import Href from "../Href/Href";
 
 export default function Header() {
   return (

@@ -1,5 +1,5 @@
 import Button from "../../components/Button/Button";
-import Header from "../../layouts/Header/Header";
+import Header from "../../components/Header/Header";
 import './HomePage.css'
 import { useAuth } from "../../context/AutContext/useAuth";
 
