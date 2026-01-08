@@ -11,10 +11,10 @@ export default function Header() {
   return (
     <header className='flex w-full border-b-2 border-[var(--border-color)] items-center justify-between p-5 h-20'>
 
-      <div className='flex items-center justify-center gap-4'>
+      <Href to='/' className='flex items-center justify-center gap-4'>
         <img className='w-10' src={LogoWebp.default} alt='Logotipo de ImpostAPI' />
         <h1 className='font-bold text-2xl'>ImpostAPI</h1>
-      </div>
+      </Href>
 
       <nav className='flex items-center justify-center gap-6'>
         <Href to={'/features'}>Features</Href>

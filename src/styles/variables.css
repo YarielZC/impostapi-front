@@ -7,13 +7,14 @@
   /* Fondos (Modo oscuro) */ 
   --dark-mode-background-color:#0a0a0a;  /* El fondo muy oscuro de toda la web */
   --dark-mode-background-secondary-color: #0e0e11; /* El fondo un poco mas claro para separar body */
-  --dark-mode-card-form-color:#111118;  /* El gris azulado de las tarjetas y formularios */
-  --dark-mode-input-color:#131118;  /* Fondo de los inputs */
+  --dark-mode-card-form-color:#101012;  /* El gris azulado de las tarjetas y formularios */
+  --dark-mode-input-color:#1c1922;  /* Fondo de los inputs */
+  --dark-mode-border-color: #202020; /* Bordes para targetas */
 
   /* Textos */ 
   --header-color:#f8fafc;  /* Blanco casi puro para títulos */
   --text-resalt-color: #685bf8; /*Azul para resaltar textos*/
-  --text-input-color: #6b7280; /* Gris para textos de inputs */
+  --text-input-color: #5e576c; /* Gris para textos de inputs */
   --secondary-text-color:#8b8b93;  /* Gris claro para textos secundarios */ 
   --error-message-color:#ef4444;  /* Rojo para mensajes de error */ 
 
