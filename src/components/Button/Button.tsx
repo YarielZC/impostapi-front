@@ -1,13 +1,15 @@
-import type { ReactNode } from 'react'
+import type { MouseEventHandler, ReactNode } from 'react'
 import './Button.css'
 import { cn } from '../../lib/utils'
 
 type variantType = 'primary' | 'secondary' 
 
-export default function Button({ children, variant, className }: {children: ReactNode, variant?: variantType | undefined, className?: string | undefined}) {
+export default function Button({ children, variant, className, onClick}: {children: ReactNode, variant?: variantType | undefined, className?: string | undefined, onClick: MouseEventHandler<HTMLButtonElement>}) {
+
   return (
 
     <button
+      onClick={onClick}
       className={cn(
         className,
         !variant && 'bg-red-500',
