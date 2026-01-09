@@ -2,6 +2,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { AuthContext } from "./CreateAuthContext";
 import { useNavigate } from 'react-router';
 import type { userDataInterface } from '../../Interfaces/userDataInterface';
+import type { LoginInfoRetorned } from '../../Interfaces/apiInterfaces';
 
 
 export default function AuthProvider({ children }: {children: ReactNode}) {
@@ -38,7 +39,7 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
         body: formulary
       })
       
-      const data: {access_token: string, refresh_token: string, user: userDataInterface} = await response.json()
+      const data: LoginInfoRetorned = await response.json()
       if (response.ok) {
         registerLogin(data.user, data.access_token, data.refresh_token)
         navigate('/')
