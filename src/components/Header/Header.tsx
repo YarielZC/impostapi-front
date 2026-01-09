@@ -9,7 +9,7 @@ export default function Header() {
   const {isAuthenticated, user} = useAuth()
 
   return (
-    <header className='flex w-full border-b-2 border-[var(--border-color)] items-center justify-between p-5 h-20'>
+    <header className='flex fixed w-full top-0 border-b-2 border-[var(--border-color)] bg-[var(--dark-mode-background-color)] items-center justify-between p-5 h-20'>
 
       <Href to='/' className='flex items-center justify-center gap-4'>
         <img className='w-10' src={LogoWebp.default} alt='Logotipo de ImpostAPI' />

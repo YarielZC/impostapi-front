@@ -7,7 +7,7 @@ export default function PublicLayout() {
     <div className="public-layout-container">
       <Header />
 
-      <main className='min-w-[80vh]'>
+      <main className='min-w-[80vh] px-5'>
         <Outlet />
       </main>
     </div>

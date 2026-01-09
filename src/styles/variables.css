@@ -1,6 +1,7 @@
 :root {
   /* Colores primarios */
   --button-color: #5a5af6;  /* El azul brillante de los botones */
+  --secondary-button-color: #111118;  /* El azul brillante de los botones */
   --button-color-hover: #1d4ed8;  /* Un azul un poco más oscuro para cuando pasas el mouse */
   --button-shadow-color: #137fec44;  /* Otro azul para la sombra */
 
@@ -9,15 +10,15 @@
   --dark-mode-background-secondary-color: #0e0e11; /* El fondo un poco mas claro para separar body */
   --dark-mode-card-form-color:#101012;  /* El gris azulado de las tarjetas y formularios */
   --dark-mode-input-color:#1c1922;  /* Fondo de los inputs */
-  --dark-mode-border-color: #202020; /* Bordes para targetas */
-
+  
   /* Textos */ 
   --header-color:#f8fafc;  /* Blanco casi puro para títulos */
   --text-resalt-color: #685bf8; /*Azul para resaltar textos*/
   --text-input-color: #5e576c; /* Gris para textos de inputs */
   --secondary-text-color:#8b8b93;  /* Gris claro para textos secundarios */ 
   --error-message-color:#ef4444;  /* Rojo para mensajes de error */ 
-
+  
   /* Bordes */
+  --dark-mode-border-color: #202020; /* Bordes para targetas */
   --border-color:#1f1f2d; /* Color para líneas sutiles (bordes) */
 }
