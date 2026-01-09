@@ -4,6 +4,7 @@ import Input from '../../components/Input/Input'
 import { IconUser, IconLock, IconArrowRight } from '@tabler/icons-react'
 import Button from '../../components/Button/Button'
 import { useForm } from 'react-hook-form'
+import Href from '../../components/Href/Href'
 
 export default function HomePage() {
 
@@ -15,14 +16,14 @@ export default function HomePage() {
 
   return (
     <section className='flex flex-col gap-8 h-[80vh] justify-center items-center'>
-      <div className='flex flex-col gap-2 justify-center items-center'>
+      <Href to='/' className='flex flex-col gap-2 justify-center items-center'>
         <img className='w-14' src={LogoWebp.default} alt='Logotipo de ImpostAPI' />
         <h1 className='text-2xl font-bold'>ImpostAPI</h1>
-      </div>
+      </Href>
 
       <Card>
         <h4 className='text-2xl font-bold'>Bienvenido de vuelta</h4>
-        <p className='text-[var(--secondary-text-color)]'>Inicia sesion para administrar tus mock API's</p>
+        <p className='text-[var(--secondary-text-color)]'>Inicia sesion para administrar tus mock API's.</p>
         <form className='flex flex-col justify-center items-center mt-6' onSubmit={handleSubmit(onSubmit)}>
           <div className='flex flex-col gap-3.5'>
             <Input 
