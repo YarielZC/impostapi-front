@@ -1,5 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { AuthContext } from "./CreateAuthContext";
+import { useNavigate } from 'react-router';
 
 interface IuserData {
   name: string
@@ -7,14 +8,19 @@ interface IuserData {
   email?: string
 }
 
+
 export default function AuthProvider({ children }: {children: ReactNode}) {
+  const BASE_URL = import.meta.env.VITE_BASE_URL
+
+  const navigate = useNavigate()
+  
   const [user, setUser] = useState<IuserData | null>(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [loading, setLoading] = useState(true)
   const [token, setToken] = useState('')
   const [refreshToken, setRefreshToken] = useState('')
 
-  const login = (userData: IuserData, token: string, refreshToken: string) => {
+  const registerLogin = (userData: IuserData, token: string, refreshToken: string) => {
     setUser(userData)
     setIsAuthenticated(true)
     setToken(token)
@@ -23,6 +29,32 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
     localStorage.setItem('user_data', JSON.stringify(userData))
     localStorage.setItem('token', token)
     localStorage.setItem('refresh_token', refreshToken)
+  }
+
+  const login = async (userData: IuserData, password: string) => {
+    
+    const formulary = new FormData()
+    formulary.append('username', userData.username)
+    formulary.append('password', password)
+    
+    try {
+      const response = await fetch(`${BASE_URL}/auth/login/`, {
+        method: 'POST',
+        body: formulary
+      })
+
+      const data: {access_token: string, refresh_token: string} = await response.json()
+      if (response.ok) {
+        registerLogin(userData, data.access_token, data.refresh_token)
+        navigate('/')
+        return true
+      }
+      return false
+
+    } catch (error) {
+      console.error(`Error en cliente: ${error}`)
+      return false
+    }
   }
 
   const logout = () => {
@@ -66,7 +98,7 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
 
 
   return (
-    <AuthContext.Provider value={{user, isAuthenticated, token, refreshToken, login, logout, loading}}>
+    <AuthContext.Provider value={{user, isAuthenticated, token, refreshToken, registerLogin, login, logout, loading}}>
       {!loading && children}
     </AuthContext.Provider>
   )
