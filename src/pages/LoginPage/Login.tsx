@@ -67,6 +67,8 @@ export default function LoginPage() {
 
           <Button onClick={()=>{return}} className='flex mt-6 w-full justify-center' variant='submit'>Iniciar Sesion <IconArrowRight/> </Button>
         </form>
+        <hr className='my-8 w-full border-2 border-[var(--dark-mode-border-color)]'/>
+        <p className='text-[var(--secondary-text-color)] text-center'>¿No tienes una cuenta todavía? <Href className='text-[var(--text-resalt-color)] hover:text-[var(--button-color-hover)]' to='/register'>Regístrate</Href></p>
       </Card>
     </section>
   )

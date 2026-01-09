@@ -197,6 +197,8 @@ export default function RegisterPage() {
           </Button>
           
         </form>
+        <hr className='my-8 w-full border-2 border-[var(--dark-mode-border-color)]'/>
+        <p className='text-[var(--secondary-text-color)] text-center'>¿Ya tienes una cuenta? <Href className='text-[var(--text-resalt-color)] hover:text-[var(--button-color-hover)]' to='/register'>Inicia sesión</Href></p>
       </Card>
     </section>
   )
