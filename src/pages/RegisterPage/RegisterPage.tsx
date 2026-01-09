@@ -10,6 +10,7 @@ import InputCheckBox from '../../components/InputChecbox/InputCheckbox'
 import { useState } from 'react'
 import { useAuth } from '../../context/AutContext/useAuth'
 import { useNavigate } from 'react-router'
+import type { userDataInterface } from '../../Interfaces/userDataInterface'
 
 interface formDataInterface {
   name: string,
@@ -18,13 +19,6 @@ interface formDataInterface {
   password: string,
   confirmpassword: string
 }
-
-interface userDataInterface {
-  name: string
-  username: string
-  email: string
-}
-
 
 export default function RegisterPage() {
   const BASE_URL = import.meta.env.VITE_BASE_URL
@@ -66,7 +60,7 @@ export default function RegisterPage() {
       }
       
       const dataUser: userDataInterface = data
-      if (!login(dataUser, formDataUser.password)) {
+      if (!login(dataUser.username, formDataUser.password)) {
         navigate('/login')
       }
 

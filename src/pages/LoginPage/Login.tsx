@@ -5,13 +5,27 @@ import { IconUser, IconLock, IconArrowRight } from '@tabler/icons-react'
 import Button from '../../components/Button/Button'
 import { useForm } from 'react-hook-form'
 import Href from '../../components/Href/Href'
+import { useAuth } from '../../context/AutContext/useAuth'
+import { useNavigate } from 'react-router'
 
-export default function HomePage() {
+interface formDataInterface {
+  username: string
+  password: string
+}
 
-  const {register, handleSubmit, formState: { errors }} = useForm()
+export default function LoginPage() {
+
+  const { login } = useAuth()
+  const navigate = useNavigate()
+  const {register, handleSubmit, formState: { errors }} = useForm<formDataInterface>()
   
-  const onSubmit = async () => {
-    console.log('Exito')
+  const asyncLogin = async (username: string, password: string) => {
+    if (await login(username, password)) {
+      navigate('/')
+    }
+  }
+  const onSubmit = (input: formDataInterface) => {
+    asyncLogin(input.username, input.password)
   }
 
   return (

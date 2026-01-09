@@ -1,18 +1,13 @@
 import { createContext } from "react";
-
-interface IuserData {
-  name: string
-  username: string
-  email?: string
-}
+import type { userDataInterface } from '../../Interfaces/userDataInterface';
 
 interface IAuthContext {
-  user: IuserData | null
+  user: userDataInterface | null
   isAuthenticated: boolean
   token: string
   refreshToken: string
-  registerLogin: (userData: IuserData, token: string, refreshToken: string) => void
-  login: (userData: IuserData, password: string) => Promise<boolean>
+  registerLogin: (userData: userDataInterface, token: string, refreshToken: string) => void
+  login: (username: string, password: string) => Promise<boolean>
   logout: () => void
   loading: boolean
 }

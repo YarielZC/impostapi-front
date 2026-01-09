@@ -1,12 +1,7 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { AuthContext } from "./CreateAuthContext";
 import { useNavigate } from 'react-router';
-
-interface IuserData {
-  name: string
-  username: string
-  email?: string
-}
+import type { userDataInterface } from '../../Interfaces/userDataInterface';
 
 
 export default function AuthProvider({ children }: {children: ReactNode}) {
@@ -14,13 +9,13 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
 
   const navigate = useNavigate()
   
-  const [user, setUser] = useState<IuserData | null>(null)
+  const [user, setUser] = useState<userDataInterface | null>(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [loading, setLoading] = useState(true)
   const [token, setToken] = useState('')
   const [refreshToken, setRefreshToken] = useState('')
 
-  const registerLogin = (userData: IuserData, token: string, refreshToken: string) => {
+  const registerLogin = (userData: userDataInterface, token: string, refreshToken: string) => {
     setUser(userData)
     setIsAuthenticated(true)
     setToken(token)
@@ -31,10 +26,10 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
     localStorage.setItem('refresh_token', refreshToken)
   }
 
-  const login = async (userData: IuserData, password: string) => {
+  const login = async (username: string, password: string) => {
     
     const formulary = new FormData()
-    formulary.append('username', userData.username)
+    formulary.append('username', username)
     formulary.append('password', password)
     
     try {
@@ -42,10 +37,10 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
         method: 'POST',
         body: formulary
       })
-
-      const data: {access_token: string, refresh_token: string} = await response.json()
+      
+      const data: {access_token: string, refresh_token: string, user: userDataInterface} = await response.json()
       if (response.ok) {
-        registerLogin(userData, data.access_token, data.refresh_token)
+        registerLogin(data.user, data.access_token, data.refresh_token)
         navigate('/')
         return true
       }
