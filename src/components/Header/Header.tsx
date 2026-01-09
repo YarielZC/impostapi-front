@@ -6,7 +6,7 @@ import * as PhotoUser from '../../assets/PhotoIcons/PhotoUser.webp'
 import { useAuth } from '../../context/AutContext/useAuth';
 
 export default function Header() {
-  const {isAuthenticated} = useAuth()
+  const {isAuthenticated, user} = useAuth()
 
   return (
     <header className='flex w-full border-b-2 border-[var(--border-color)] items-center justify-between p-5 h-20'>
@@ -29,8 +29,8 @@ export default function Header() {
         { isAuthenticated ?
         (<>
           <div className='flex flex-col'>
-            <p className='text-md font-semibold text-white'>Username</p>
-            <p className='text-[var(--secondary-text-color)] text-sm'>Free Plan</p>
+            <p className='text-md font-semibold text-white'>{user?.name}</p>
+            <p className='text-[var(--secondary-text-color)] text-sm text-right'>Free Plan</p>
           </div>
           <img className='w-10' src={PhotoUser.default} alt='Imagen generica de usuario' />
         </>)
