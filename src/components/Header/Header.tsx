@@ -17,9 +17,9 @@ export default function Header() {
       </Href>
 
       <nav className='flex items-center justify-center gap-6'>
-        <Href to={'/features'}>Features</Href>
-        <Href to={'/pricing'}>Pricing</Href>
-        <Href to={'/docs'}>Docs</Href>
+        <Href to={'/features'}>Dashboard</Href>
+        <Href to={'/docs'}>Contacto</Href>
+        <Href to={'/pricing'}>Donar</Href>
       </nav>
 
 

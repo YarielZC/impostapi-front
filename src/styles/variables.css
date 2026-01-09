@@ -10,6 +10,7 @@
   --dark-mode-background-secondary-color: #0e0e11; /* El fondo un poco mas claro para separar body */
   --dark-mode-card-form-color:#101012;  /* El gris azulado de las tarjetas y formularios */
   --dark-mode-input-color:#1c1922;  /* Fondo de los inputs */
+  --dark-blue-color: #18182e; /*Fondo azul oscuro*/
   
   /* Textos */ 
   --header-color:#f8fafc;  /* Blanco casi puro para títulos */
