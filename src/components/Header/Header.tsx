@@ -39,15 +39,15 @@ export default function Header() {
 
     
 
-      <div onClick={() => setShowMenu(!showMenu)} className='flex items-center justify-center gap-8 max-sm:gap-4 '>
+      <div className='flex items-center justify-center gap-8 max-sm:gap-4 '>
         { isAuthenticated ?
         (<>
           
-          <div className='flex flex-col'>
+          <div onClick={() => setShowMenu(!showMenu)} className='flex flex-col'>
             <p className='text-md font-semibold text-white max-sm:text-xs'>{user?.username}</p>
             <p className='text-[var(--secondary-text-color)] text-sm text-right max-sm:text-xs'>Free Plan</p>
           </div>
-          <img className='w-10 max-sm:w-7' src={PhotoUser.default} alt='Imagen generica de usuario' />
+          <img onClick={() => setShowMenu(!showMenu)} className='w-10 max-sm:w-7' src={PhotoUser.default} alt='Imagen generica de usuario' />
 
           
 
