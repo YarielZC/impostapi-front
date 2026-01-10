@@ -5,7 +5,7 @@ import FilledCircle from '../FIlledCircle/FilledCircle';
 
 export default function CodeExpampleJson() {
   return (
-    <div className='w-4/5 flex flex-col rounded-xl border border-[var(--border-color)] h-fit custom-shadow'>
+    <div className='w-4/5 -z-20 flex flex-col rounded-xl border border-[var(--border-color)] h-fit custom-shadow'>
       <div className='flex items-center justify-between py-4 px-6 border-b border-b-[var(--border-color)] bg-[var(--dark-mode-card-form-color)] rounded-t-xl'>
         <div className='flex gap-2'>
           <FilledCircle color='#ff5f56' />
