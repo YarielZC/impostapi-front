@@ -5,7 +5,8 @@ import LoginPage from './pages/LoginPage/Login'
 import PublicLayout from './layouts/PublicLayout/PublicLayout'
 import RegisterPage from './pages/RegisterPage/RegisterPage'
 import AlreadyLogguedRoute from './components/AlreadyLogguedRoute'
-
+import ProtectedRoute from './components/ProtectedRoute'
+import DashboardPage from './pages/DashboardPage/DashboardPage'
 
 
 function App() {
@@ -30,6 +31,15 @@ function App() {
               <RegisterPage />
             </AlreadyLogguedRoute>
           }>
+        </Route>
+        <Route
+          path='/dashboard'
+          element={
+            <ProtectedRoute>
+              <DashboardPage />
+            </ProtectedRoute>
+          }
+        >
         </Route>
     </Routes>
   
