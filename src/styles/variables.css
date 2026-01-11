@@ -11,6 +11,8 @@
   --dark-mode-card-form-color:#101012;  /* El gris azulado de las tarjetas y formularios */
   --dark-mode-input-color:#1c1922;  /* Fondo de los inputs */
   --dark-blue-color: #18182e; /*Fondo azul oscuro*/
+
+  --dark-dashboard-card-color: #171717; /* Fondo para targetas en dashboard*/
   
   /* Textos */ 
   --header-color:#f8fafc;  /* Blanco casi puro para títulos */
@@ -22,4 +24,5 @@
   /* Bordes */
   --dark-mode-border-color: #202020; /* Bordes para targetas */
   --border-color:#1f1f2d; /* Color para líneas sutiles (bordes) */
+  --dark-border-dashboard: #2c2c2c; /*Bordes en dashboard*/
 }

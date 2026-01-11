@@ -18,7 +18,7 @@ export default function ButtonPanel( {to, children, icon, className}: {to: strin
   return (
     <Href className={`${className}`} to={to}>
       <button
-        className='flex gap-2.5 py-3 px-4 rounded-lg w-full'
+        className='cursor-pointer flex gap-2.5 py-3 px-4 rounded-lg w-full'
         style={{
           color: `${isActive ? `#ffffff` : undefined}`,
           backgroundColor: `${isActive ? `#262626` : 'transparent'}`
