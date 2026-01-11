@@ -88,7 +88,7 @@ export default function RegisterPage() {
   }
 
   return (
-    <section className='flex flex-col gap-8 h-[100vh] justify-center items-center'>
+    <section className='flex flex-col gap-8 h-auto py-5 justify-center items-center max-sm:w-full max-sm:px-3'>
       <Href to='/' className='flex flex-col gap-2 justify-center items-center'>
         <img className='w-14' src={LogoWebp.default} alt='Logotipo de ImpostAPI' />
         <h1 className='text-2xl font-bold'>ImpostAPI</h1>
@@ -96,14 +96,14 @@ export default function RegisterPage() {
 
       <Card>
         <h4 className='text-2xl font-bold'>Crea tu cuenta</h4>
-        <p className='text-[var(--secondary-text-color)]'>Empieza a diseñar tus API's en segundos.</p>
+        <p className='text-[var(--secondary-text-color)] max-sm:text-sm'>Empieza a diseñar tus API's en segundos.</p>
         <form className='flex flex-col justify-center items-center mt-6' onSubmit={handleSubmit(onSubmit)}>
-          <div className='flex flex-col gap-3.5'>
+          <div className='flex flex-col gap-3.5 max-sm:w-full'>
             <Input 
             type='text' 
             label='Nombre' 
             error={errors.name ? errors.name.message : ''}
-            placeholder='Juan Alberto'
+            placeholder='Primer nombre'
             {
               ...register('name', {
                 required: 'Este campo es obligatorio',
@@ -116,7 +116,7 @@ export default function RegisterPage() {
             label='Nombre de usuario' 
             inputIcon={<IconAt />}
             error={errors.username ? errors.username.message : (customUsernameError != '' ? customUsernameError : '')}
-            placeholder='usuario'
+            placeholder='Nombre de usuario'
             {
               ...register('username', {
                 required: 'Este campo es obligatorio',

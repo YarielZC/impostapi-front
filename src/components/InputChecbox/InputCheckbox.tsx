@@ -12,8 +12,8 @@ export default function InputCheckBox ({id, checked, handleClick, children}: {id
         checked && 'block',
         !checked && 'hidden')}
       />
-      <input onClick={handleClick} checked={checked} id={id} className='appearance-none bg-[var(--dark-mode-input-color)] h-5 w-5 border-2 border-[var(--text-input-color)] rounded-md checked:bg-[var(--button-color-hover)] checked:border-transparent focus:outline-none cursor-pointer transition duration-200' type='checkbox'/>
-      <label className='select-none cursor-pointer' htmlFor={id}>{children}</label>
+      <input onClick={handleClick} checked={checked} id={id} className='appearance-none bg-[var(--dark-mode-input-color)] h-5 w-5 aspect-square border-2 border-[var(--text-input-color)] rounded-md checked:bg-[var(--button-color-hover)] checked:border-transparent focus:outline-none cursor-pointer transition duration-200' type='checkbox'/>
+      <label className='select-none cursor-pointer max-sm:text-sm' htmlFor={id}>{children}</label>
     </div>
   )
 }

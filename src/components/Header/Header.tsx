@@ -39,7 +39,7 @@ export default function Header() {
 
     
 
-      <div className='flex items-center justify-center gap-8 max-sm:gap-4 '>
+      <div className='flex items-center justify-center gap-8 max-sm:gap-4'>
         { isAuthenticated ?
         (<>
           
@@ -56,9 +56,8 @@ export default function Header() {
         </>)
         :
         (<>
-          <Href className='text-sm' to={'/login'}>Login</Href>
-          <Href to='/register'>
-            <Button onClick={() => {return}} variant='primary'>Sign Up</Button>
+          <Href to='/login'>
+            <Button onClick={() => {return}} variant='primary'>Iniciar sesión </Button>
           </Href>
           <hr className='h-8 border border-[var(--border-color)] hidden max-sm:inline'/>
           <button type='button' onClick={() => setShowMenu(!showMenu)} className='text-white select-none cursor-pointer hidden max-sm:inline'><IconMenu className='-mx-2'/></button>
@@ -103,6 +102,7 @@ export default function Header() {
       opacity: `${showMenu ? '100' : '0'}`,
       transition: 'all 0.7s ease',
     }}>
+      {!isAuthenticated && <Href className='text-sm' to={'/login'}>Crear una cuenta</Href>}
       <Href className='text-sm cursor-pointer' to={'/features'}>Home</Href>
       <Href className='text-sm cursor-pointer' to={'/features'}>Dashboard</Href>
       <Href className='text-sm cursor-pointer' to={'/docs'}>Contacto</Href>

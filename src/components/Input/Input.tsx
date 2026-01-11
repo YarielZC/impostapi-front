@@ -15,19 +15,19 @@ export default function Input({className, inputClassName, ref, label, error, pla
 
   return (
     <div className={`flex flex-col gap-1 relative ${className}`}>
-      {label && <label className='text-white ml-0.5'>{label}</label>}
+      {label && <label className='text-white ml-0.5 max-sm:text-sm'>{label}</label>}
 
-      <div className='text-[var(--text-input-color)] absolute top-9 left-2'>
+      <div className='text-[var(--text-input-color)] absolute top-9 left-2 max-sm:top-[2.2rem]'>
         {inputIcon}
       </div>
 
-      {type == 'password' && <button type='button' className='border-none outline-none bg-none cursor-pointer flex justify-center items-center text-[var(--text-input-color)] absolute left-[calc(100%-2.5rem)] top-9' onClick={handleShowPassClick}>
+      {type == 'password' && <button type='button' className='border-none outline-none bg-none cursor-pointer flex justify-center items-center text-[var(--text-input-color)] absolute left-[calc(100%-2.5rem)] top-9 max-sm:top-[2.2rem]' onClick={handleShowPassClick}>
         {showPass ? <IconEyeOff /> : <IconEye />}
       </button>}
 
       <input 
         className={cn(
-          `py-2 pl-4 rounded-xl text-[var(--secondary-text-color)] placeholder-[var(--text-input-color)] bg-[var(--dark-mode-input-color)] border-[1px] outline-none ${inputClassName}`,
+          `py-2 pl-4 rounded-xl text-[var(--secondary-text-color)] placeholder-[var(--text-input-color)] bg-[var(--dark-mode-input-color)] border-[1px] outline-none max-sm:text-sm max-sm:py-3 ${inputClassName}`,
           error && `border-[var(--error-message-color)]`,
           !error && `border-[var(--text-input-color)]`,
           inputIcon && 'pl-9'
@@ -37,7 +37,7 @@ export default function Input({className, inputClassName, ref, label, error, pla
         placeholder={placeholder}
         {...props}/>
 
-      <span className='flex items-center mt-2 gap-1.5 font-semibold text-sm text-[var(--error-message-color)]'>
+      <span className='flex items-center mt-2 gap-1.5 font-semibold text-sm text-[var(--error-message-color)] max-sm:text-sm'>
         {error ? <IconExclamationCircle size={16}/> : ''}
         {error ? error.toString() : ''}
       </span>
