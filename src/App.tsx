@@ -9,7 +9,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import DashboardPage from './pages/DashboardPage/DashboardPage'
 import DashboardLayout from './layouts/DashboardLayout/DashboardLayout'
 import ProjectsPage from './pages/ProjectsPage/ProjectsPage'
-import SettingsPage from './pages/SettingsPage/ProjectsPage'
+import SettingsPage from './pages/SettingsPage/SettingsPage'
 
 
 function App() {
