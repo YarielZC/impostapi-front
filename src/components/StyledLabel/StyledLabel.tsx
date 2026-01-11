@@ -18,7 +18,7 @@ export default function StyledLabel({ colorText, colorIcon, children, className,
   }
 
   return (
-    <div className={`flex w-fit gap-1 items-center py-1.5 px-4 roundeds-full  border-2 ${className}`}
+    <div className={`${className} flex w-fit gap-1 items-center py-1.5 px-4 roundeds-full  border-2 `}
     style={{
       borderColor: darkenHexColor(colorText, 0.6),
       backgroundColor: darkenHexColor(colorText, 0.85),
