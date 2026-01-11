@@ -10,6 +10,8 @@ interface IAuthContext {
   login: (username: string, password: string) => Promise<boolean>
   logout: () => void
   loading: boolean
+  ignorateRedirections: boolean
+  setIgnorateRedirections: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const AuthContext = createContext<IAuthContext | null>(null)

@@ -7,11 +7,12 @@ import Href from '../../components/Href/Href'
 import CardExplain from '../../components/CardExplain/CardExplain'
 import { useNavigate } from 'react-router'
 import { useAuth } from '../../context/AutContext/useAuth'
+import { useEffect } from 'react'
 
 export default function HomePage() {
 
   const navigate = useNavigate()
-  const {isAuthenticated} = useAuth()
+  const {isAuthenticated, ignorateRedirections, setIgnorateRedirections } = useAuth()
 
   const empiezaACrearIgualHandleClick = () => {
     if (isAuthenticated) {
@@ -20,6 +21,11 @@ export default function HomePage() {
     }
     navigate('/login')
   }
+
+  useEffect(() => {
+    if (ignorateRedirections) setIgnorateRedirections(false)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ignorateRedirections])
 
   return (
     <>

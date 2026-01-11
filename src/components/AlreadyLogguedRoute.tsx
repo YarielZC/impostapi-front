@@ -5,9 +5,8 @@ import { type ReactNode } from 'react';
 
 export default function AlreadyLogguedRoute ({ children }: {children: ReactNode}) {
   const { isAuthenticated } = useAuth();
-
   if (isAuthenticated) {
-    return <Navigate to='/' replace/>
+    return <Navigate to='/dashboard' replace/>
   }
 
   return children;

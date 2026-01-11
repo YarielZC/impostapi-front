@@ -20,12 +20,12 @@ export default function LoginPage() {
   const {register, handleSubmit, formState: { errors }} = useForm<formDataInterface>()
   
   const asyncLogin = async (username: string, password: string) => {
-    if (await login(username, password)) {
-      navigate('/')
-    }
+    return login(username, password)
   }
-  const onSubmit = (input: formDataInterface) => {
-    asyncLogin(input.username, input.password)
+  const onSubmit = async (input: formDataInterface) => {
+    if (await asyncLogin(input.username, input.password)) {
+      navigate('/dashboard')
+    }
   }
 
   return (

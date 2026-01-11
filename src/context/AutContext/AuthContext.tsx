@@ -15,6 +15,7 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
   const [loading, setLoading] = useState(true)
   const [token, setToken] = useState('')
   const [refreshToken, setRefreshToken] = useState('')
+  const [ignorateRedirections, setIgnorateRedirections] = useState(false)
 
   const registerLogin = (userData: userDataInterface, token: string, refreshToken: string) => {
     setUser(userData)
@@ -42,7 +43,7 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
       const data: LoginInfoRetorned = await response.json()
       if (response.ok) {
         registerLogin(data.user, data.access_token, data.refresh_token)
-        navigate('/')
+        navigate('/dashboard')
         return true
       }
       return false
@@ -94,7 +95,7 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
 
 
   return (
-    <AuthContext.Provider value={{user, isAuthenticated, token, refreshToken, registerLogin, login, logout, loading}}>
+    <AuthContext.Provider value={{user, isAuthenticated, token, refreshToken, setIgnorateRedirections, ignorateRedirections, registerLogin, login, logout, loading}}>
       {!loading && children}
     </AuthContext.Provider>
   )
