@@ -1,7 +1,7 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { AuthContext } from "./CreateAuthContext";
 import { useNavigate } from 'react-router';
-import type { userDataInterface } from '../../Interfaces/userDataInterface';
+import type { userDataInterface, userDataServerInterface } from '../../Interfaces/userDataInterface';
 import type { LoginInfoRetorned } from '../../Interfaces/apiInterfaces';
 
 
@@ -17,13 +17,17 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
   const [refreshToken, setRefreshToken] = useState('')
   const [ignorateRedirections, setIgnorateRedirections] = useState(false)
 
-  const registerLogin = (userData: userDataInterface, token: string, refreshToken: string) => {
-    setUser(userData)
+
+  const registerLogin = (userData: userDataServerInterface, token: string, refreshToken: string) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const {logs, ...data} = userData
+    
+    setUser(data)
     setIsAuthenticated(true)
     setToken(token)
     setRefreshToken(refreshToken)
 
-    localStorage.setItem('user_data', JSON.stringify(userData))
+    localStorage.setItem('user_data', JSON.stringify(data))
     localStorage.setItem('token', token)
     localStorage.setItem('refresh_token', refreshToken)
   }
@@ -53,6 +57,70 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
       return false
     }
   }
+
+  const checkAndgetNewToken = async (status: number) => {
+      
+    if (status == 401){
+      const responseRefresh = await fetch(`${BASE_URL}/auth/refresh_auth/`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${refreshToken}`,
+          'Content-Type': 'application/json'
+        } 
+      })
+      if (!responseRefresh.ok) {
+        return {status: false, newToken: undefined}
+      }
+      const data: LoginInfoRetorned = await responseRefresh.json()
+      registerLogin(data.user, data.access_token, data.refresh_token)
+      return {status: true, newToken: data.access_token}
+    }
+    return {status: false, newToken: undefined}
+  }
+
+  const get_token = () => {
+    return token
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const withToken = async ( callback:  (data: any) => void, url: string, method: string, contentType: string, body?: BodyInit | null | undefined) => {
+    let response = await fetch(url, {
+      method: method,
+      headers: {
+        'Authorization': `Bearer ${get_token()}`,
+        'Content-Type': contentType,
+      },
+      body: body
+    })
+
+    if (!response.ok) {
+      const check = await checkAndgetNewToken(response.status)
+      if (!check.status) {
+        throw new Error(`Error en la peticion: ${response.status}`)
+      } else {
+        response = await fetch(url, {
+          method: method,
+          headers: {
+            'Authorization': `Bearer ${check.newToken}`,
+            'Content-Type': contentType,
+          },
+          body: body
+        })
+        if (!response.ok) {
+          throw new Error(`Error en la peticion: ${response.status}`)
+        }
+        const data = await response.json()
+        callback(data)
+        return
+      }
+    }
+    if (response.ok) {
+      const data = await response.json()
+      callback(data)
+    }
+    return
+  }
+
 
   const logout = () => {
     setUser(null)
@@ -95,7 +163,7 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
 
 
   return (
-    <AuthContext.Provider value={{user, isAuthenticated, token, refreshToken, setIgnorateRedirections, ignorateRedirections, registerLogin, login, logout, loading}}>
+    <AuthContext.Provider value={{user, isAuthenticated, token, refreshToken, setIgnorateRedirections, ignorateRedirections, withToken, registerLogin, login, logout, loading, checkAndgetNewToken, get_token}}>
       {!loading && children}
     </AuthContext.Provider>
   )
