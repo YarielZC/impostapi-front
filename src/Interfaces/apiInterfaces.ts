@@ -1,7 +1,9 @@
-import type { userDataInterface } from './userDataInterface'
+import type { userDataServerInterface } from './userDataInterface'
+
 
 export interface LoginInfoRetorned {
   access_token: string
   refresh_token: string
-  user: userDataInterface
+  user: userDataServerInterface
 }
+
