@@ -6,9 +6,9 @@ import { useAuth } from '../../context/AutContext/useAuth'
 import { cn } from '../../lib/utils'
 import type { projectServerInterface } from '../../Interfaces/projectInterfaces'
 import './DashboardPage.css'
-import type { endpointServerInterface, flatEndpoint } from '../../Interfaces/endpointsInterfaces'
+import type { endpointServerInterface } from '../../Interfaces/endpointsInterfaces'
 import { shortText } from '../../logic/textTools'
-import EndpointListCard from '../../components/EndpointListCard/EndpointListCard'
+import ListComponent from '../../components/ListEndpointsComponent/ListEndpointsComponent'
 
 export default function DashboardPage() {
   const { withToken } = useAuth()
@@ -161,23 +161,9 @@ export default function DashboardPage() {
           </section>
         </section>
 
-        <section className='px-20 py-10 flex flex-col w-full'>
-          <div className='flex justify-between w-full mx-auto h-10 items-center'>
-            <h6 className='inline text-2xl'>Endpoints</h6>
-            <p className='text-[var(--secondary-text-color)]'>
-              de un total de {flatEndpointsList.length} endpoints
-            </p>
-          </div>
-          <hr className='border-[var(--secondary-text-color)] w-full'/>
-          
-          <div className='flex flex-col gap-6 w-full mt-6'>
-              {
-                flatEndpointsList.map((endpoint: flatEndpoint) => {
-                  return <EndpointListCard key={endpoint._id} endpoint={endpoint}/>
-                })
-              }
-          </div>
-        </section>
+        <ListComponent
+          listToRender={flatEndpointsList}
+        />
       </section>
     </>
   )
