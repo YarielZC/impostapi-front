@@ -23,7 +23,7 @@ export function HeaderDashboard() {
   }, [])
   
   return (
-    <header className='flex items-center px-8 top-0 justify-between fixed w-[calc(100%-20rem)] h-20 border-b-2 border-b-[var(--dark-mode-border-color)]'>
+    <header className='flex items-center px-8 top-0 justify-between fixed w-[calc(100%-20rem)] h-20 border-b-2 border-b-[var(--dark-mode-border-color)] bg-[var(--dark-mode-background-color)] z-50'>
       <h4 className='text-3xl font-bold'>
         Dashboard
       </h4>
