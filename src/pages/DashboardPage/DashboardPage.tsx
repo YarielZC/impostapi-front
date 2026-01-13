@@ -1,14 +1,12 @@
 import { useEffect, useState, useMemo } from 'react'
 import Console from '../../components/Console/Console'
-import StatsCard from '../../components/StatsCard/StatsCard'
-import ProgressStadisticBar from '../../components/ProgressStadisticBar/ProgressStadisticBar'
 import { useAuth } from '../../context/AutContext/useAuth'
-import { cn } from '../../lib/utils'
 import type { projectServerInterface } from '../../Interfaces/projectInterfaces'
 import './DashboardPage.css'
 import type { endpointServerInterface } from '../../Interfaces/endpointsInterfaces'
-import { shortText } from '../../logic/textTools'
-import ListComponent from '../../components/ListEndpointsComponent/ListEndpointsComponent'
+import MoreUsedProyects from './components/MoreUsedProyects'
+import Stats from './components/Stats'
+import ListComponent from './components/ListEndpointsComponent'
 
 export default function DashboardPage() {
   const { withToken } = useAuth()
@@ -96,69 +94,25 @@ export default function DashboardPage() {
     return projects.reduce((acum, project) => acum + project.request_count, 0)
   }, [projects])
 
-  const projectsForActivity = useMemo(() => {
-    return [...projects]
-      .sort((a, b) => b.request_count - a.request_count)
-      .slice(0, 5)
-  }, [projects])
-  
-  const calculatePercent = (quantity: number) => {
-    if (totalRequest === 0) return 0
-    return Math.round((quantity * 100) / totalRequest)
-  }
+
+
 
   return (
     <>
       <section className='flex flex-col gap-4'>
-        <section className='w-4/5 mx-auto grid grid-cols-3 p-10 gap-6'>
-          <StatsCard amount={totalRequest}>
-            Consultas totales
-          </StatsCard>
-          <StatsCard amount={flatEndpointsList.length}> 
-            Endpoints Activos
-          </StatsCard>
-          <StatsCard amount={projects.length}>
-            Proyectos Totales
-          </StatsCard>
-        </section>
+        <Stats 
+          flatEndpointsList={flatEndpointsList}
+          projects={projects}
+          totalRequest={totalRequest}
+        />
 
         <section className='flex gap-8 px-8 items-center'>
           <Console />
-          
-          <section className='relative flex-1 self-start flex w-full flex-col gap-3'>
-            
-            {(!loading && totalRequest === 0) && (
-              <div className='flex justify-center items-center absolute top-14 w-full h-[calc(100%-8rem)] z-30'>
-                <p className='text-white font-bold text-2xl'>AÚN NO TIENES ACTIVIDAD</p>
-              </div>
-            )}
-
-            <div className='flex justify-between w-full h-10 items-center'>
-              <h6 className='inline text-2xl'>Con más actividad</h6>
-              <p className='text-[var(--secondary-text-color)]'>
-                de un total de {projects.length} proyectos
-              </p>
-            </div>
-            <hr className='border-[var(--secondary-text-color)] w-full'/>
-
-            <div className={cn(
-              'w-full flex flex-col items-center justify-center gap-4 transition-all duration-500',
-              (totalRequest === 0 && !loading) && 'blur-sm select-none'
-            )}>
-              {loading ? (
-                 <p className="text-gray-400 mt-4">Cargando estadísticas...</p>
-              ) : (
-                projectsForActivity.map((project, index) => (
-                  <ProgressStadisticBar 
-                    key={project._id || index}
-                    title={shortText(project.name, 22)}
-                    description={shortText(project.description, 55)}
-                    percent={calculatePercent(project.request_count)}
-                  />
-                ))
-              )}
-            </div>
-          </section>
+          <MoreUsedProyects 
+            loading={loading}
+            projects={projects}
+            totalRequest={totalRequest}
+          />
         </section>
 
         <ListComponent

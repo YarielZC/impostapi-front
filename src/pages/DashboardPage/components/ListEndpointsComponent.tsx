@@ -1,6 +1,6 @@
-import type { flatEndpoint } from '../../Interfaces/endpointsInterfaces'
-import EndpointListCard from '../EndpointListCard/EndpointListCard'
-import './ListEndpointsComponent.css'
+import EndpointListCard from '../../../components/EndpointListCard/EndpointListCard'
+import type { flatEndpoint } from '../../../Interfaces/endpointsInterfaces'
+import '../DashboardPage.css'
 
 export default function ListComponent({listToRender}: {listToRender: flatEndpoint[]}) {
   return (
