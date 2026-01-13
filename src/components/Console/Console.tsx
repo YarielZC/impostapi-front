@@ -13,86 +13,72 @@ export default function Console() {
   const { withToken } = useAuth()
   const [logHistory, setLogHistory] = useState<logInterface[]>([])
   const [refreshing, setRefreshing] = useState<boolean>(false)
+  const [inCooldown, setInCooldown] = useState(false)
 
   const calculatePorcentLogs = () => {
-    return (logHistory.length * 100) / limitLogs
+    if (logHistory.length === 0) return 0;
+    return Math.round((logHistory.length * 100) / limitLogs)
   }
 
-  const refreshHandleClick = () => {
-    setRefreshing(true)
-    loadLogs()
+  const loadLogs = async () => {
+    try {
+      const data = await withToken<logInterface[]>(
+        `${BASE_URL}/dashboard/me/get_logs`, 
+        { method: 'GET' } 
+      )
+      
+      setLogHistory(data || [])
+      
+    } catch (error) {
+      console.error("Error cargando logs:", error)
+    }
+  }
+
+  const refreshHandleClick = async () => {
+    if (refreshing || inCooldown) return;
+
+    setInCooldown(true);
+    setTimeout(() => {
+      setInCooldown(false);
+    }, 5000); 
+
+    setRefreshing(true);
+    
+    await loadLogs();
     
     setTimeout(()=>{
       setRefreshing(false)
     }, 500)
   }
 
-  
-
-
-  const loadLogs = async () => {
-    withToken((data) => {
-      setLogHistory(data)
-    },
-    `${BASE_URL}/dashboard/me/get_logs`,
-    'GET',
-    'application/json'
-    )
-
-    // let response = await fetch(`${BASE_URL}/dashboard/me/get_logs`, {
-    //   method: 'GET',
-    //   headers: {
-    //     'Authorization': `Bearer ${get_token()}`,
-    //     'Content-Type': 'application/json'
-    //   } 
-    // })
-
-    // if (!response.ok) {
-    //   const check = await checkAndgetNewToken(response.status)
-    //   if (!check.status) {
-    //     throw new Error(`Error en la peticion: ${response.status}`)
-    //   } else {
-    //     response = await fetch(`${BASE_URL}/dashboard/me/get_logs`, {
-    //       method: 'GET',
-    //       headers: {
-    //         'Authorization': `Bearer ${check.newToken}`,
-    //         'Content-Type': 'application/json'
-    //       } 
-    //     })
-    //     if (!response.ok) {
-    //       throw new Error(`Error en la peticion: ${response.status}`)
-    //     }
-    //     const data = await response.json()
-    //     setLogHistory(data)
-    //     return
-    //   }
-    // }
-    // if (response.ok) {
-    //   const data = await response.json()
-    //   setLogHistory(data)
-    // }
-    // return
-  }
-
   useEffect(() => {
     loadLogs()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
   return (
-    <section className='w-full flex-1 flex flex-col rounded-xl border-2 border-[var(--dark-border-dashboard)] h-fit custom-shado'>
-      <div className='flex items-center justify-between py-2 px-6 border-b-2 border-b-[var(--dark-border-dashboard)] bg-[var(--dark-dashboard-card-color)] rounded-t-xl'>
+    <section className='w-full flex-1 flex flex-col rounded-lg border-2 border-[var(--dark-border-dashboard)] h-fit custom-shado'>
+      <div className='flex items-center justify-between py-2 px-6 border-b border-b-[var(--dark-border-dashboard)] bg-[var(--dark-dashboard-card-color)] rounded-t-lg'>
         <p className='text-[#dcdcdc] font-bolds '>Historial de peticiones (Logs)</p>
-        <button onClick={refreshHandleClick} type='button' className=' text-[#b7b7b7]'><IconRefresh style={{
-          rotate: `${refreshing ? '360deg': '0deg'}`,
-          transition: 'all 0.5s ease' 
-        }}/></button>
+        <button 
+          onClick={refreshHandleClick} 
+          type='button' 
+          className='text-[#b7b7b7] hover:text-white transition-colors'
+          disabled={inCooldown}
+        >
+          <IconRefresh style={{
+            transform: `rotate(${refreshing ? '360deg' : '0deg'})`,
+            transition: 'transform 0.5s ease' 
+          }}/>
+        </button>
       </div>
 
-      <div className='h-80 flex flex-col gap-4 justify-end-safe overflow-y-scroll overscroll-y-contain bg-[#121212]'>
+      <div className='h-80 flex flex-col gap-4 justify-end-safe overflow-y-scroll overscroll-y-contain bg-[#101010]'>
         { 
           logHistory?.map((log, index) => {
             return (
               <ConsoleText
-                key={index}
+                key={index} 
                 timestamp={processISODate(log.timestamp)}
                 projectName={log.project_name}
                 endpointName={log.endpoint_name}
@@ -106,12 +92,18 @@ export default function Console() {
         }
       </div>
 
-      <div className='flex items-center justify-end py-2 px-6 rounded-b-2xl border-t border-t-[var(--border-color)] bg-[var(--dark-dashboard-card-color)] gap-2'>
-        {calculatePorcentLogs() != 100 ? <IconPointFilled className={`w-fit text-[#10b981]`}></IconPointFilled> :
-        <IconAlertTriangle className='w-5 text-red-700'/>}
+      <div className='flex items-center justify-end py-2 px-6 rounded-b-lg border-t border-t-[var(--dark-border-dashboard)] bg-[var(--dark-dashboard-card-color)] gap-2'>
+        {calculatePorcentLogs() < 100 ? (
+           <IconPointFilled className={`w-fit text-[#10b981]`} />
+        ) : (
+           <IconAlertTriangle className='w-5 text-red-700'/>
+        )}
+        
         <p className='text-sm' style={{
-          color: calculatePorcentLogs() == 100 ? 'oklch(50.5% 0.213 27.518)': 'var(--secondary-text-color)'
-        }}> Logs: {logHistory.length} / {limitLogs}  ({calculatePorcentLogs()}%)</p>
+          color: calculatePorcentLogs() >= 100 ? 'oklch(50.5% 0.213 27.518)': 'var(--secondary-text-color)'
+        }}> 
+          Logs: {logHistory.length} / {limitLogs} ({calculatePorcentLogs()}%)
+        </p>
       </div>
     </section>
   )
