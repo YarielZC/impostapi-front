@@ -5,7 +5,6 @@ import { type ReactNode } from 'react';
 
 export default function ProtectedRoute ({ children }: {children: ReactNode}) {
   const { isAuthenticated, ignorateRedirections } = useAuth();
-  console.log('se ejecutp')
   if (ignorateRedirections) return <Navigate to='/'/>
 
   if (!isAuthenticated && !ignorateRedirections) {
