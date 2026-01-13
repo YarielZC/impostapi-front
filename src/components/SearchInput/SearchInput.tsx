@@ -13,7 +13,7 @@ export default function SearchInput({placeholder, onChange, ref}: {placeholder: 
       </div>
       <input
         ref={ref}
-        className='py-3 pl-10 rounded-xl text-[var(--secondary-text-color)] placeholder-[var(--text-input-color)] bg-[var(--dark-dashboard-card-color)] border-2 border-[var(--dark-border-dashboard)] outline-none max-sm:text-sm max-sm:py-3 pr-20'
+        className='py-3 pl-10 rounded-xl text-[#ffffff] placeholder-[var(--text-input-color)] bg-[var(--dark-dashboard-card-color)] border-2 border-[var(--dark-border-dashboard)] outline-none max-sm:text-sm max-sm:py-3 pr-20'
         type='search' 
         placeholder={placeholder}
         onChange={onChange}

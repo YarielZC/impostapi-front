@@ -5,7 +5,7 @@ import { shortText } from '../../../logic/textTools';
 import '../DashboardPage.css'
 import type { projectServerInterface } from '../../../Interfaces/projectInterfaces';
 
-export default function MoreUsedProyects({projects, totalRequest, loading}: {projects: projectServerInterface[], totalRequest: number, loading: boolean}) {
+export default function MoreUsedProyects({projects, totalRequest}: {projects: projectServerInterface[], totalRequest: number}) {
   
   const calculatePercent = (quantity: number) => {
     if (totalRequest === 0) return 0
@@ -22,7 +22,7 @@ export default function MoreUsedProyects({projects, totalRequest, loading}: {pro
   return (
     <section className='relative flex-1 self-start flex w-full flex-col gap-3'>
             
-      {(!loading && totalRequest === 0) && (
+      {(totalRequest === 0) && (
         <div className='flex justify-center items-center absolute top-14 w-full h-[calc(100%-8rem)] z-30'>
           <p className='text-white font-bold text-2xl'>AÚN NO TIENES ACTIVIDAD</p>
         </div>
@@ -38,11 +38,9 @@ export default function MoreUsedProyects({projects, totalRequest, loading}: {pro
 
       <div className={cn(
         'w-full flex flex-col items-center justify-center gap-4 transition-all duration-500',
-        (totalRequest === 0 && !loading) && 'blur-sm select-none'
+        (totalRequest === 0) && 'blur-sm select-none'
       )}>
-        {loading ? (
-            <p className="text-gray-400 mt-4">Cargando estadísticas...</p>
-        ) : (
+        {
           projectsForActivity.map((project, index) => (
             <ProgressStadisticBar 
               key={project._id || index}
@@ -51,7 +49,7 @@ export default function MoreUsedProyects({projects, totalRequest, loading}: {pro
               percent={calculatePercent(project.request_count)}
             />
           ))
-        )}
+        }
       </div>
     </section>
   )

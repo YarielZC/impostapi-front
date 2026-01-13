@@ -4,11 +4,15 @@ import './styles/variables.css'
 import App from './App.tsx'
 import { BrowserRouter } from 'react-router';
 import AuthProvider from './context/AutContext/AuthContext.tsx'
+import APIProvider from './context/APIContext/APIContext.tsx';
 
 createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <AuthProvider>
-        <App />
+        <APIProvider>
+          <App />
+        </APIProvider>
+
       </AuthProvider>
     </BrowserRouter>
 )
