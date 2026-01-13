@@ -10,7 +10,7 @@ export default function StyledLabel({ colorText, colorIcon, children, className,
   const roundedValue = () => {
     if (roundedType) {
       if (roundedType == 'full') return 'calc(infinity * 1px)'
-      if (roundedType == 'medium') return '1rem'
+      if (roundedType == 'medium') return '0.5rem'
     }
     return 'calc(infinity * 1px)'
   }
