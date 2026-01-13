@@ -1,37 +1,19 @@
-import { useEffect, useState } from 'react';
-import { useAuth } from '../../context/AutContext/useAuth';
 import ConsoleText from '../ConsoleText/ConsoleText';
 import './Console.css'
-import type { logInterface } from '../../Interfaces/userDataInterface';
 import { processISODate } from '../../logic/dateWork';
 import { IconAlertTriangle, IconPointFilled, IconRefresh } from '@tabler/icons-react';
+import { useAPIContext } from '../../context/APIContext/useAPIContext';
+import { useState } from 'react';
 
 export default function Console() {
-  const BASE_URL = import.meta.env.VITE_BASE_URL
   const limitLogs = 20
-
-  const { withToken } = useAuth()
-  const [logHistory, setLogHistory] = useState<logInterface[]>([])
+  const {logHistory, loadLogs} = useAPIContext()
   const [refreshing, setRefreshing] = useState<boolean>(false)
   const [inCooldown, setInCooldown] = useState(false)
 
   const calculatePorcentLogs = () => {
     if (logHistory.length === 0) return 0;
     return Math.round((logHistory.length * 100) / limitLogs)
-  }
-
-  const loadLogs = async () => {
-    try {
-      const data = await withToken<logInterface[]>(
-        `${BASE_URL}/dashboard/me/get_logs`, 
-        { method: 'GET' } 
-      )
-      
-      setLogHistory(data || [])
-      
-    } catch (error) {
-      console.error("Error cargando logs:", error)
-    }
   }
 
   const refreshHandleClick = async () => {
@@ -50,11 +32,6 @@ export default function Console() {
       setRefreshing(false)
     }, 500)
   }
-
-  useEffect(() => {
-    loadLogs()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   return (
     <section className='w-full flex-1 flex flex-col rounded-lg border-2 border-[var(--dark-border-dashboard)] h-fit custom-shado'>

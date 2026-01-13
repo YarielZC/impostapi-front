@@ -35,34 +35,33 @@ function App() {
           </AlreadyLogguedRoute>
         }>
       </Route>
-
-      <Route path='/' element={<DashboardLayout />}>
-        <Route
-          path='dashboard'
-          element={
-            <ProtectedRoute>
-              <DashboardPage />
-            </ProtectedRoute>
-          }
-        >
+        <Route path='/' element={<DashboardLayout />}>
+          <Route
+            path='dashboard'
+            element={
+              <ProtectedRoute>
+                <DashboardPage />
+              </ProtectedRoute>
+            }
+          >
+          </Route>
+          <Route
+            path='dashboard/projects'
+            element={
+              <ProtectedRoute>
+                <ProjectsPage />
+              </ProtectedRoute>
+            }
+          ></Route>
+          <Route
+            path='dashboard/settings'
+            element={
+              <ProtectedRoute>
+                <SettingsPage />
+              </ProtectedRoute>
+            }
+          ></Route>
         </Route>
-        <Route
-          path='dashboard/projects'
-          element={
-            <ProtectedRoute>
-              <ProjectsPage />
-            </ProtectedRoute>
-          }
-        ></Route>
-        <Route
-          path='dashboard/settings'
-          element={
-            <ProtectedRoute>
-              <SettingsPage />
-            </ProtectedRoute>
-          }
-        ></Route>
-      </Route>
     </Routes>
   
   )

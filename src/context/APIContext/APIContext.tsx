@@ -3,6 +3,7 @@ import { APIContext } from './CreateAPIContext';
 import type { projectServerInterface } from '../../Interfaces/projectInterfaces';
 import type { endpointServerInterface } from '../../Interfaces/endpointsInterfaces';
 import { useAuth } from '../AutContext/useAuth';
+import type { logInterface } from '../../Interfaces/userDataInterface';
 
 export default function APIProvider({ children }: {children: React.ReactNode}) {
   const BASE_URL = import.meta.env.VITE_BASE_URL
@@ -10,6 +11,7 @@ export default function APIProvider({ children }: {children: React.ReactNode}) {
   const { withToken } = useAuth()
 
   const [projects, setProjects] = useState<projectServerInterface[]>([])
+  const [logHistory, setLogHistory] = useState<logInterface[]>([])
   const [endpoints, setEndpoints] = useState<Record<string, endpointServerInterface[]>>({})
 
   const getAllEndpoints = async (projectList: projectServerInterface[]) => {
@@ -77,9 +79,24 @@ export default function APIProvider({ children }: {children: React.ReactNode}) {
     });
 
   }, [endpoints, projects]); 
+  
+  const loadLogs = async () => {
+    try {
+      const data = await withToken<logInterface[]>(
+        `${BASE_URL}/dashboard/me/get_logs`, 
+        { method: 'GET' } 
+      )
+      
+      setLogHistory(data || [])
+      
+    } catch (error) {
+      console.error("Error cargando logs:", error)
+    }
+  }
 
   useEffect(() => {
     getProjectsToBack()
+    loadLogs()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -87,7 +104,9 @@ export default function APIProvider({ children }: {children: React.ReactNode}) {
       <APIContext.Provider value={{
         projects,
         endpoints,
-        flatEndpointsList
+        flatEndpointsList,
+        loadLogs,
+        logHistory
       }}>
         {children}
       </APIContext.Provider>
