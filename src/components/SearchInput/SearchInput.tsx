@@ -2,7 +2,7 @@ import type { ChangeEventHandler } from 'react'
 import './SearchInput.css'
 import { IconCommand, IconSearch } from '@tabler/icons-react'
 
-export default function SearchInput({placeholder, onChange, ref}: {placeholder: string, onChange: ChangeEventHandler<HTMLInputElement>, ref: React.Ref<HTMLInputElement>}) {
+export default function SearchInput({placeholder, onChange, ref, value}: {placeholder: string, onChange: ChangeEventHandler<HTMLInputElement>, ref: React.Ref<HTMLInputElement>, value: string}) {
   return (
     <div className='relative w-fit'>
       <div className='text-[var(--secondary-text-color)] absolute top-3.5 left-3 max-sm:top-[2.2rem]'>
@@ -17,6 +17,7 @@ export default function SearchInput({placeholder, onChange, ref}: {placeholder: 
         type='search' 
         placeholder={placeholder}
         onChange={onChange}
+        value={value}
       />
     
     </div>
