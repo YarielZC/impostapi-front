@@ -2,9 +2,9 @@ import Console from '../../components/Console/Console'
 import './DashboardPage.css'
 import MoreUsedProyects from './components/MoreUsedProyects'
 import Stats from './components/Stats'
-import ListComponent from './components/ListEndpointsComponent'
 import { useAPIContext } from '../../context/APIContext/useAPIContext'
 import { useMemo } from 'react'
+import ListEndpointsComponent from '../../components/ListEndpointsComponent/ListEndpointsComponent'
 
 export default function DashboardPage() {
 
@@ -31,7 +31,7 @@ export default function DashboardPage() {
           />
         </section>
 
-        <ListComponent
+        <ListEndpointsComponent
           listToRender={flatEndpointsList}
         />
       </section>
