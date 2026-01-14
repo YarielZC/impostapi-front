@@ -5,14 +5,16 @@ import StatusCodeLabel from '../StatusCodeLabel/StatusCodeLabel';
 import StyledLabel from '../StyledLabel/StyledLabel';
 import { shortText } from '../../logic/textTools';
 import type { flatEndpoint } from '../../Interfaces/endpointsInterfaces';
+import { cleanUrl } from '../../logic/cleanUrl';
 
 export default function EndpointListCard({endpoint}: {endpoint: flatEndpoint}) {
+
   return (
     <Card variant='dboard' className='w-full flex items-center justify-between '>
       <div className=' flex flex-col gap-4'>
 
               
-        <p className='text-2xl flex gap-6 text-[#a49cff]'>{endpoint.projectName} / {endpoint.name}<StatusCodeLabel size='xs' roundedType='full' code={200} /></p>
+        <p className='text-2xl flex gap-6 text-[#a49cff]'>{endpoint.projectName} / {endpoint.name}<StatusCodeLabel size='xs' roundedType='full' code={endpoint.status_code} /></p>
 
         <div className=' flex justify-between items-center'>
           <div className='flex gap-10 items-center'>
@@ -25,10 +27,10 @@ export default function EndpointListCard({endpoint}: {endpoint: flatEndpoint}) {
             <div className='flex flex-col gap-1'>
 
               <p className='flex gap-4 text-white text-xl font-mono font-bold'>
-                {endpoint.path_url}
+                {cleanUrl(endpoint.path_url)}
                 <span className='text-[#a49cff]'>({endpoint.delay ? endpoint.delay : 0}ms)</span>
               </p>
-              <p className='text-[var(--secondary-text-color)]'>{shortText('Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe ducimus eveniet', 55)}</p>
+              <p className='text-[var(--secondary-text-color)]'>{shortText(endpoint.description, 55)}</p>
             </div>
             
           </div>
