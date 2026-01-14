@@ -36,7 +36,7 @@ export default function LoginPage() {
       </Href>
 
       <Card>
-        <h4 className='text-2xl font-bold'>Bienvenido de vuelta</h4>
+        <h4 className='text-2xl font-bold text-white'>Bienvenido de vuelta</h4>
         <p className='text-[var(--secondary-text-color)]'>Inicia sesion para administrar tus mock API's.</p>
         <form className='flex flex-col justify-center items-center mt-6' onSubmit={handleSubmit(onSubmit)}>
           <div className='flex flex-col gap-3.5 max-sm:w-full'>

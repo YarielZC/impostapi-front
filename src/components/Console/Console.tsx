@@ -34,9 +34,9 @@ export default function Console() {
   }
 
   return (
-    <section className='w-full flex-1 flex flex-col rounded-lg border-2 border-[var(--dark-border-dashboard)] h-fit custom-shado'>
+    <section className='w-full flex-1 flex flex-col rounded-lg border-2 border-[var(--dark-border-dashboard)] h-fit max-sm:max-h-80'>
       <div className='flex items-center justify-between py-2 px-6 border-b border-b-[var(--dark-border-dashboard)] bg-[var(--dark-dashboard-card-color)] rounded-t-lg'>
-        <p className='text-[#dcdcdc] font-bolds '>Historial de peticiones (Logs)</p>
+        <p className='text-[#dcdcdc] max-sm:text-sm'>Historial de peticiones (Logs)</p>
         <button 
           onClick={refreshHandleClick} 
           type='button' 
@@ -50,7 +50,7 @@ export default function Console() {
         </button>
       </div>
 
-      <div className='h-80 flex flex-col gap-4 justify-end-safe overflow-y-scroll overscroll-y-contain bg-[#101010]'>
+      <div className='h-80 flex flex-col justify-end-safe overflow-y-scroll overscroll-y-contain bg-[#101010]'>
         { 
           logHistory?.map((log, index) => {
             return (
@@ -61,7 +61,7 @@ export default function Console() {
                 endpointName={log.endpoint_name}
                 method={log.method.toUpperCase()}
                 code={log.status_code}
-                url={`/${log.url}`}
+                url={log.url}
                 delay={log.delay ? log.delay : '0'}
               />
             )
@@ -73,10 +73,10 @@ export default function Console() {
         {calculatePorcentLogs() < 100 ? (
            <IconPointFilled className={`w-fit text-[#10b981]`} />
         ) : (
-           <IconAlertTriangle className='w-5 text-red-700'/>
+           <IconAlertTriangle className='w-5 max-sm:w-4 text-red-700'/>
         )}
         
-        <p className='text-sm' style={{
+        <p className='text-sm max-sm:text-xs' style={{
           color: calculatePorcentLogs() >= 100 ? 'oklch(50.5% 0.213 27.518)': 'var(--secondary-text-color)'
         }}> 
           Logs: {logHistory.length} / {limitLogs} ({calculatePorcentLogs()}%)

@@ -12,9 +12,9 @@ export default function CardExplain({ icon, title, description, className }: { i
           {icon}
         </div>
 
-        <p className='text-white text-2xl font-bold max-sm:text-xl'>{title}</p>
+        <p className='text-white text-2xl font-bold max-sm:text-lg'>{title}</p>
       </div>
-      <p className='text-[var(--secondary-text-color)]'>{description}</p>
+      <p className='text-[var(--secondary-text-color)] max-sm:text-sm'>{description}</p>
     </Card>
   )
 }

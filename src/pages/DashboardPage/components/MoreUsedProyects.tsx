@@ -29,8 +29,8 @@ export default function MoreUsedProyects({projects, totalRequest}: {projects: pr
       )}
 
       <div className='flex justify-between w-full h-10 items-center'>
-        <h6 className='inline text-2xl'>Con más actividad</h6>
-        <p className='text-[var(--secondary-text-color)]'>
+        <h6 className='inline text-2xl max-sm:text-lg'>Con más actividad</h6>
+        <p className='text-[var(--secondary-text-color)] max-sm:text-xs'>
           de un total de {projects.length} proyectos
         </p>
       </div>

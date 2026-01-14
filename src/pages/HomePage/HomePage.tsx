@@ -57,7 +57,7 @@ export default function HomePage() {
       </section>
 
       <section className='flex flex-col gap-4 py-32 px-44 max-2xl:px-32 max-xl:px-16 justify-center items-center w-full max-sm:px-1.5 max-sm:py-24 max-w-[1920px] mx-auto'>
-        <h4 className='text-center font-bold text-4xl'>¿Por qué ImpostAPI?</h4>
+        <h4 className='text-center font-bold text-4xl text-white'>¿Por qué ImpostAPI?</h4>
         <p className='w-1/3 max-2xl:w-4/5 text-center text-[var(--secondary-text-color)]'>Diseñado para velocidad, flexibilidad y felicidad del desarrollador. No sigas luchando con las demoras del equipo de backend.</p>
 
         <div className='grid grid-rows-2 grid-cols-3 max-lg:grid-cols-2 max-lg:grid-rows-3 gap-6 mt-16 px-12 max-xl:px-0 w-full max-sm:grid-rows-5 max-sm:grid-cols-1 max-sm:px-4 '>
@@ -102,8 +102,8 @@ export default function HomePage() {
 
       <section className='flex flex-col gap-6 items-center justify-center border-t-2 border-[var(--dark-mode-border-color)] py-32 bg-[var(--dark-mode-card-form-color)] '>
         <div className='max-w-[1920px] mx-auto flex flex-col gap-6 items-center justify-cente'>
-          <h4 className='text-4xl font-bold max-sm:text-3xl'>¿Un café para el dev?</h4>
-          <p className='w-1/2 max-lg:w-3/4 text-center text-[var(--secondary-text-color)] max-sm:w-full max-sm:px-6'>Este proyecto es completamente gratuito y no necesitas pagar absolutamente nada para utilizar sus funcionalidades. No obstante se agradece un montón cualquier donación que desee hacer a este proyecto y/o ayudarme a crecer como desarrollador. Muchas gracias por estar acá.</p>
+          <h4 className='text-4xl font-bold max-sm:text-3xl text-white'>¿Un café para el dev?</h4>
+          <p className='w-1/2 max-lg:w-3/4 text-center text-[var(--secondary-text-color)] max-sm:w-full max-sm:px-6 max-sm:text-sm'>Este proyecto es completamente gratuito y no necesitas pagar absolutamente nada para utilizar sus funcionalidades. No obstante se agradece un montón cualquier donación que desee hacer a este proyecto y/o ayudarme a crecer como desarrollador. Muchas gracias por estar acá.</p>
           <div className='flex gap-7 justify-center items-center mt-6'>
             <a href='/'><Button type='button' className='flex gap-2 text-lg' variant='primary'><IconCoffee />Contactar para donar</Button></a>
             <a href='/'><Button type='button' className='flex gap-2 text-lg' variant='secondary'><IconBrandGithubFilled />Contribuir al repo</Button></a>

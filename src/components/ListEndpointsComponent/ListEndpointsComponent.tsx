@@ -4,10 +4,10 @@ import './ListEndpointsComponent.css'
 
 export default function ListEndpointsComponent({listToRender}: {listToRender: flatEndpoint[]}) {
   return (
-    <section className='px-20 py-10 flex flex-col w-full'>
+    <section className='px-20 py-10 flex flex-col w-full max-lg:px-12 max-sm:px-6'>
       <div className='flex justify-between w-full mx-auto h-10 items-center'>
-        <h6 className='inline text-2xl'>Endpoints</h6>
-        <p className='text-[var(--secondary-text-color)]'>
+        <h6 className='inline text-2xl max-sm:text-lg'>Endpoints</h6>
+        <p className='text-[var(--secondary-text-color)] max-sm:text-xs'>
           de un total de {listToRender.length} endpoints
         </p>
       </div>

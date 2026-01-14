@@ -3,7 +3,7 @@ import Href from '../Href/Href'
 import './ButtonPanel.css'
 import { useLocation } from 'react-router'
 
-export default function ButtonPanel( {to, children, icon, className}: {to: string, children:ReactNode, icon: ReactNode, className?: string} ) {
+export default function ButtonPanel( {to, children, icon, className, onClick}: {to: string, children:ReactNode, icon: ReactNode, className?: string, onClick?: React.MouseEventHandler<HTMLButtonElement>} ) {
   const [isActive, setIsActive] = useState(false)
   const location = useLocation()
 
@@ -18,6 +18,7 @@ export default function ButtonPanel( {to, children, icon, className}: {to: strin
   return (
     <Href className={`${className}`} to={to}>
       <button
+        onClick={onClick}
         className='cursor-pointer flex gap-2.5 py-3 px-4 rounded-lg w-full'
         style={{
           color: `${isActive ? `#ffffff` : 'var(--secondary-text-color)'}`,
@@ -29,7 +30,7 @@ export default function ButtonPanel( {to, children, icon, className}: {to: strin
         }}>
           {icon}
         </div>
-        {children}
+        <span className='max-lg:hidden max-sm:inline'>{children}</span>
       </button>
     </Href>
   )

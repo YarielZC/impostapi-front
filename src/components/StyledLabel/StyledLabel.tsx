@@ -16,7 +16,7 @@ export default function StyledLabel({ colorText, colorIcon, children, className,
   }
 
   return (
-    <div className={`${className} h-fit flex w-fit gap-1 items-center py-1.5 px-2 border-2 `}
+    <div className={`${className} h-fit flex w-fit gap-1 items-center py-1.5 px-2 border-2`}
     style={{
       borderColor: darkenHexColor(colorText, 0.6),
       backgroundColor: darkenHexColor(colorText, 0.85),

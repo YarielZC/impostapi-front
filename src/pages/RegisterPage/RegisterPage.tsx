@@ -95,7 +95,7 @@ export default function RegisterPage() {
       </Href>
 
       <Card>
-        <h4 className='text-2xl font-bold'>Crea tu cuenta</h4>
+        <h4 className='text-2xl font-bold text-white'>Crea tu cuenta</h4>
         <p className='text-[var(--secondary-text-color)] max-sm:text-sm'>Empieza a diseñar tus API's en segundos.</p>
         <form className='flex flex-col justify-center items-center mt-6' onSubmit={handleSubmit(onSubmit)}>
           <div className='flex flex-col gap-3.5 max-sm:w-full'>

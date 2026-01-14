@@ -4,7 +4,7 @@ import './StatusCodeLabel.css'
 
 type roundedTypes = 'full' | 'medium'
 type sizeType = 'xs' | 'sm' | 'base' | 'lg' | 'xl' 
-export default function StatusCodeLabel({code, size, roundedType}: { code: string | number, size: sizeType, roundedType: roundedTypes}) {
+export default function StatusCodeLabel({code, size, roundedType, className}: { code: string | number, size: sizeType, roundedType: roundedTypes, className?:string}) {
   const addDescriptionCode = (): {text: string, color: `#${string}`} => {
     if (code == 200) {
       return {text: `${code} OK`, color: '#24d364'}
@@ -24,6 +24,7 @@ export default function StatusCodeLabel({code, size, roundedType}: { code: strin
     <StyledLabel 
       colorText={addDescriptionCode().color}
       notIcon
+      className={className}
       textClassName={cn(`text-${size} font-mono`)}
       roundedType={roundedType}
     >{addDescriptionCode().text}</StyledLabel> 

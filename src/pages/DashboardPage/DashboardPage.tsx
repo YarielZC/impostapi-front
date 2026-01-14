@@ -23,7 +23,7 @@ export default function DashboardPage() {
           totalRequest={totalRequest}
         />
 
-        <section className='flex gap-8 px-8 items-center'>
+        <section className='flex gap-8 px-8 items-center max-[1370px]:flex-col max-[1370px]:px-36 max-lg:px-10 max-sm:px-4'>
           <Console />
           <MoreUsedProyects 
             projects={projects}
