@@ -9,7 +9,7 @@ export function HeaderDashboard({onChange}: {onChange: ChangeEventHandler<HTMLIn
 
   const [inputValue, setInputValue] = useState<string>('')
 
-  const onChangeHandle = (event) => {
+  const onChangeHandle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value)
     onChange(event)
   }

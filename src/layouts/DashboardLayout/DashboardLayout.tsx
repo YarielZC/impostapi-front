@@ -14,7 +14,7 @@ export default function DashboardLayout () {
   const [searched, setSearched] = useState<flatEndpoint[]>([])
   const [searching, setSearching] = useState<boolean>(false)
 
-  const onChangeHandle = (input) => {
+  const onChangeHandle = (input: React.ChangeEvent<HTMLInputElement>) => {
     const newValue: string = input.target.value.toLowerCase()
     let newSearched: flatEndpoint[] = []
 
