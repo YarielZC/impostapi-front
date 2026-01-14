@@ -2,16 +2,28 @@ import { IconPlus } from '@tabler/icons-react'
 import Button from '../../../Button/Button'
 import SearchInput from '../../../SearchInput/SearchInput'
 import './HeaderDashboard.css'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState, type ChangeEventHandler } from 'react'
 
-export function HeaderDashboard() {
+export function HeaderDashboard({onChange}: {onChange: ChangeEventHandler<HTMLInputElement>}) {
   const inputRef = useRef<HTMLInputElement>(null)
+
+  const [inputValue, setInputValue] = useState<string>('')
+
+  const onChangeHandle = (event) => {
+    setInputValue(event.target.value)
+    onChange(event)
+  }
+
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if ((event.metaKey || event.ctrlKey) && (event.key === 'k')) {
         event.preventDefault()
         inputRef.current?.focus()
+      }
+      if (event.code == 'Escape') {
+        event.preventDefault()
+        setInputValue('')
       }
     }
 
@@ -32,7 +44,8 @@ export function HeaderDashboard() {
         <SearchInput
           ref={inputRef} 
           placeholder='Busca entre tus endpoints...'
-          onChange={() => {return}}
+          onChange={onChangeHandle}
+          value={inputValue}
         />
         <Button variant='primary' className='flex gap-2'><IconPlus /> Crear nuevo endpoint</Button>
       </div>

@@ -1,7 +1,7 @@
 export interface endpointServerInterface {
   _id: string
   name: string
-  description?: string
+  description: string
   method: string
   path_url: string
   response?: string | object
@@ -14,7 +14,7 @@ export interface flatEndpoint {
   projectId: string
   _id: string
   name: string
-  description?: string | undefined
+  description: string
   method: string
   path_url: string
   response?: string | object | undefined
