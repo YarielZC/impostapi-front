@@ -21,7 +21,6 @@ export default function SearchInput({placeholder, onChange, ref, value}: {placeh
           value={value}
         />
         <input
-          ref={ref}
           className='max-2xl:w-80 max-2xl:py-2 py-3 pl-10 rounded-xl text-[#ffffff] placeholder-[var(--text-input-color)] bg-[var(--dark-dashboard-card-color)] border-2 border-[var(--dark-border-dashboard)] outline-none max-sm:py-3 max-md:pr-4 max-md:w-64 pr-20 max-sm:hiddens max-sm:absolute max-sm:right-0 max-sm:w-32 max-sm:px-2 max-sm:text-xs max-sm:inline hidden'
           type='search' 
           placeholder={'Busca endpoints...'}

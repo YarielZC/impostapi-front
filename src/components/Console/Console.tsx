@@ -52,7 +52,7 @@ export default function Console() {
 
       <div className='h-80 flex flex-col justify-end-safe overflow-y-scroll overscroll-y-contain bg-[#101010]'>
         { 
-          logHistory?.map((log, index) => {
+          logHistory?.reverse().map((log, index) => {
             return (
               <ConsoleText
                 key={index} 

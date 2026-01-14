@@ -102,9 +102,9 @@ export default function Header() {
       opacity: `${showMenu ? '100' : '0'}`,
       transition: 'all 0.7s ease',
     }}>
-      {!isAuthenticated && <Href className='text-sm' to={'/login'}>Crear una cuenta</Href>}
+      {!isAuthenticated && <Href className='text-sm' to={'/register'}>Crear una cuenta</Href>}
       <Href className='text-sm cursor-pointer' to={'/features'}>Home</Href>
-      <Href className='text-sm cursor-pointer' to={'/features'}>Dashboard</Href>
+      <Href className='text-sm cursor-pointer' to={'/dashboard'}>Dashboard</Href>
       <Href className='text-sm cursor-pointer' to={'/docs'}>Contacto</Href>
       <Href className='text-sm cursor-pointer' to={'/pricing'}>Donar</Href>
       {isAuthenticated && <button className='text-sm cursor-pointer text-[var(--secondary-text-color)]' onClick={() => {
